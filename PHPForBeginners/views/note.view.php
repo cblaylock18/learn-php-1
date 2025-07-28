@@ -9,7 +9,7 @@
         </p>
         <ul>
             <li>
-                <?= $note['body'] ?>
+                <?= htmlspecialchars($note['body']) ?>
             </li>
         </ul>
     </div>
