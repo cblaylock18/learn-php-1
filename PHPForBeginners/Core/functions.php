@@ -42,20 +42,13 @@ function view($view, $attributes = [])
     require base_path("views/{$view}");
 }
 
-function login($user)
+function redirect($path)
 {
-    $_SESSION['user'] = [
-        'email' => $user['email']
-    ];
-
-    session_regenerate_id(true);
+    header("location: {$path}");
+    die();
 }
 
-function logout()
+function old($key, $default = '')
 {
-    $_SESSION = [];
-    session_destroy();
-
-    $params = session_get_cookie_params();
-    setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+    return Core\Session::get('old')[$key] ?? $default;
 }
