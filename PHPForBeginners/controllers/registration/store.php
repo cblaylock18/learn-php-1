@@ -30,7 +30,7 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 ])->find();
 
 if ($user) {
-    header('location: /');
+    header('location: /login');
     die();
 } else {
     $user = $db->query("INSERT into `users` (`email`, `password`) values
@@ -39,9 +39,7 @@ if ($user) {
         'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
 
-    $_SESSION['user'] = [
-        'email' => $email
-    ];
+    login($user);
 
     header('location: /');
     die();

@@ -10,7 +10,9 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="/" aria-current="page" class="<?= urlIS("/") ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium text-white">Home</a>
                         <a href="/about" class="<?= urlIS("/about") ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium text-white">About</a>
-                        <a href="/notes" class="<?= urlIS("/notes") ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium text-white">Notes</a>
+                        <?php if ($_SESSION['user'] ?? false) : ?>
+                            <a href="/notes" class="<?= urlIS("/notes") ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium text-white">Notes</a>
+                        <?php endif ?>
                         <a href="/contact" class="<?= urlIS("/contact") ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium text-white">Contact</a>
                     </div>
                 </div>
@@ -50,7 +52,10 @@
                                 <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
                                 <a id="user-menu-item-0" role="menuitem" href="#" tabindex="-1" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
                                 <a id="user-menu-item-1" role="menuitem" href="#" tabindex="-1" class="block px-4 py-2 text-sm text-gray-700">Settings</a>
-                                <a id="user-menu-item-2" role="menuitem" href="#" tabindex="-1" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
+                                <form action="/session" method="POST">
+                                    <input type="hidden" name='_method' value="DELETE" />
+                                    <button type="submit" class="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -107,7 +112,8 @@
             <div class="mt-3 space-y-1 px-2">
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+                <a id="user-menu-item-2" role="menuitem" href="#" tabindex="-1" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
+
             </div>
         </div>
     </div>
